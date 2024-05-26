@@ -22,7 +22,6 @@ onMounted(() => {
 });
 
 const emitData = (item) => {
-    console.log("send from emit" + item);
     emit("data", item);
 };
 </script>

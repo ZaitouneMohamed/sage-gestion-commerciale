@@ -1,33 +1,46 @@
 <script setup>
-import { reactive } from 'vue'
+import { ref, watch } from 'vue';
+import { useForm, router } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 
-let props = defineProps({
+const props = defineProps({
     data: Object,
     type: String,
 });
 
-const form = reactive({
+const form = useForm({
     category_name: props.data?.category_name || "",
 });
 
+watch(
+    () => props.data,
+    (newData) => {
+        form.category_name = newData?.category_name || "";
+    },
+    { immediate: true }
+);
+
 function submitForm() {
-    console.log(form.category_name);
+    if (props.type == "create") {
+        router.post('categorie', form)
+    } else {
+        router.put('categorie/' + props.data.id, form)
+    }
 }
 </script>
+
 
 <template>
     <form @submit.prevent="submitForm">
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
-                form {{ form.category_name }} <br />
-                data : {{ data }}
+                form {{ form }} <br />
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">categorie name<span
                         class="text-red-500"> *</span></label>
                 <input type="text" v-model="form.category_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Driver name" />
-                <!-- <InputError :message="form.errors.category_name" class="mt-2" /> -->
+                    placeholder="categorie name" />
+                <InputError :message="form.errors.category_name" class="mt-2" />
             </div>
         </div>
         <button type="submit" :disabled="form.processing"

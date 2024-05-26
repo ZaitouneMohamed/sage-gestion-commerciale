@@ -21,6 +21,9 @@ onMounted(() => {
         <SideBar />
         <!-- SideBar End -->
         <main class="h-auto p-4 pt-20 md:ml-64">
+            <div v-if="true" class="text text-blue-500 mb-4">
+                {{ $page.props.flash.success }}
+            </div>
             <slot />
         </main>
     </div>

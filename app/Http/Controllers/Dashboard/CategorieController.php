@@ -14,7 +14,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $data = Categorie::latest()->paginate(15);
+        $data = Categorie::latest()->paginate(7);
         return Inertia::render('Admin/categories/Index', compact('data'));
     }
 
@@ -47,7 +47,15 @@ class CategorieController extends Controller
      */
     public function update(Request $request, Categorie $categorie)
     {
-        //
+        $this->validate($request, [
+            "category_name" => "required|unique:categories,category_name|max:100",
+        ]);
+        $categorie->update($request->all());
+        return redirect()->back()->with(
+            [
+                "success" => "Categorie update with success"
+            ]
+        );
     }
 
     /**
@@ -55,6 +63,11 @@ class CategorieController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        //
+        $categorie->delete();
+        return redirect()->back()->with(
+            [
+                "success" => "Categorie delete with success"
+            ]
+        );
     }
 }
