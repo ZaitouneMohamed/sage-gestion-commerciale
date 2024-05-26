@@ -61,6 +61,7 @@ import { Link } from "@inertiajs/vue3";
                 </li>
                 <li>
                     <Link
+                    :href="route('admin.categorie.index')"
                         class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                     >
                         <svg
@@ -76,7 +77,7 @@ import { Link } from "@inertiajs/vue3";
                             />
                         </svg>
 
-                        <span class="ml-3">Chauffeurs</span>
+                        <span class="ml-3">Categorie</span>
                     </Link>
                 </li>
                 <li>
