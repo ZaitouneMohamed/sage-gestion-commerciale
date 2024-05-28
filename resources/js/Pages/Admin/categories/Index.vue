@@ -3,12 +3,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Head } from "@inertiajs/vue3";
 import AddEdit from "./AddEdit.vue";
-// import UpdateDriver from "./UpdateDriver.vue";
-// import ReadDriver from "./ReadDriver.vue";
 import DefaultModal from "@/Components/Modal.vue";
-// import UpdateModal from "@/Components/UpdateModal.vue";
-// import ReadModal from "@/Components/ReadModal.vue";
-// import CrudLayout from "@/Components/CrudLayout.vue";
 import { ref } from "vue";
 defineProps({
     data: {
@@ -163,7 +158,7 @@ const CreateCategory = () => {
             </div>
         </div>
         <!-- <CrudLayout></CrudLayout> -->
-        <Table :items="data" :title="title" :columns="columns" :colNames="colNames" @data="handleCategoryData">
+        <Table :items="data" :title="title" :route="'categorie'" :columns="columns" :showactions="true" :colNames="colNames" @data="handleCategoryData">
         </Table>
         <DefaultModal>
             <template #title> {{ type }} category </template>
