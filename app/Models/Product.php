@@ -14,6 +14,20 @@ class Product extends Model
         'category_id', 'supplier_id'
     ];
 
+    protected $appends = [
+        'categorie_name',
+        'supplier_name',
+    ];
+
+    public function getCategorieNameAttribute(): string
+    {
+        return $this->category->category_name;
+    }
+
+    public function getSupplierNameAttribute(): string
+    {
+        return $this->supplier->supplier_name;
+    }
     public function category()
     {
         return $this->belongsTo(Categorie::class);
