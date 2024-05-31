@@ -1,10 +1,9 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Table from "@/Components/Table.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, useForm , router } from "@inertiajs/vue3";
 import AddEdit from "./AddEdit.vue";
 import DefaultModal from "@/Components/Modal.vue";
-import ImportForm from "@/Components/ImportForm.vue";
 import { ref } from "vue";
 defineProps({
     data: {
@@ -39,8 +38,7 @@ const form = useForm({
 });
 
 function submitForm() {
-    const route = props.title;
-    router.post(route, form)
+    router.post("importProduct", form)
 }
 
 const title = "product";
