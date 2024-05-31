@@ -8,25 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'product_name', 'description', 'price', 'stock_quantity',
-        'category_id', 'supplier_id'
+        'ref',
+        'name',
+        'price',
+        'price_f',
+        'tva',
+        'category_id',
     ];
-
     protected $appends = [
-        'categorie_name',
+        'category_name',
         'supplier_name',
     ];
 
-    public function getCategorieNameAttribute(): string
+    public function getCategoryNameAttribute(): string
     {
-        return $this->category->category_name;
+        return $this->category?->category_name ?? "gjw9";
     }
 
     public function getSupplierNameAttribute(): string
     {
-        return $this->supplier->supplier_name;
+        return $this->supplier?->supplier_name ?? "gjw9";
     }
     public function category()
     {

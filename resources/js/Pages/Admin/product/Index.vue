@@ -1,9 +1,10 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Table from "@/Components/Table.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import AddEdit from "./AddEdit.vue";
 import DefaultModal from "@/Components/Modal.vue";
+import ImportForm from "@/Components/ImportForm.vue";
 import { ref } from "vue";
 defineProps({
     data: {
@@ -13,23 +14,34 @@ defineProps({
 });
 
 const columns = [
-    'product_name',
-    'description',
+    'ref',
+    'name',
     'price',
-    'stock_quantity',
-    'categorie_name',
-    'supplier_name'
+    'price_f',
+    'tva',
+    'category_name',
+    'supplier_name',
 ];
 
 const colNames = [
-    'Product Name',
-    'Description',
+    'ref',
+    'name',
     'Price',
-    'Stock Quantity',
+    'Price facture',
+    'Stock tva',
     'Category Name',
     'Supplier Name'
 ];
 
+
+const form = useForm({
+    file: null,
+});
+
+function submitForm() {
+    const route = props.title;
+    router.post(route, form)
+}
 
 const title = "product";
 
@@ -77,12 +89,38 @@ const CreateProduct = () => {
                 <!-- Modal toggle -->
                 <div class="flex justify-center m-5">
                     <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-                        class="block text-black bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                         type="button" @click="CreateSupplier">
                         Add {{ title }}
                     </button>
                 </div>
-                <div class="flex items-center w-full space-x-3 md:w-auto">
+                <div class="flex justify-center m-5">
+                    <button id="defaultModalButton" data-modal-target="importProductModal"
+                        data-modal-toggle="importProductModal"
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        type="button">
+                        Import {{ title }}
+                    </button>
+                </div>
+                <DefaultModal :id="'importProductModal'">
+                    <template #title> Import Form </template>
+                    <template #body>
+                        <form class="max-w-sm mx-auto" @submit.prevent="submitForm">
+                            <div class="mb-5">
+                                <label for="email"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Excel
+                                    File Here</label>
+                                <input @input="form.file = $event.target.files[0]"
+                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    aria-describedby="user_avatar_help" id="user_avatar" type="file" required>
+                                <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"></div>
+                            </div>
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                        </form>
+                    </template>
+                </DefaultModal>
+                <!-- <div class="flex items-center w-full space-x-3 md:w-auto">
                     <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
                         class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg md:w-auto focus:outline-none hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                         type="button">
@@ -163,14 +201,14 @@ const CreateProduct = () => {
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- <CrudLayout></CrudLayout> -->
         <Table :items="data" :title="title" :route="'product'" :columns="columns" :showactions="true"
             :colNames="colNames" @data="handleSuppData">
         </Table>
-        <DefaultModal>
+        <DefaultModal :id="'defaultModal'">
             <template #title> {{ type }} Product </template>
             <template #body>
                 <AddEdit :type="type" :data="selectedData" />

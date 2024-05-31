@@ -4,6 +4,7 @@ import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     title: String,
+    id: String
 });
 
 let title = props.title;
@@ -12,7 +13,7 @@ let title = props.title;
 <template>
     <!-- Main modal -->
     <div
-        id="defaultModal"
+        :id="id"
         tabindex="-1"
         aria-hidden="true"
         class="fixed top-0 left-0 right-0 z-50 items-center justify-center hidden w-full overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full"
@@ -29,7 +30,7 @@ let title = props.title;
                     <h3
                         class="text-lg font-semibold text-gray-900 dark:text-white"
                     >
-                        Add <slot name="title" />
+                        <slot name="title" />
                     </h3>
                     <button
                         type="button"
