@@ -10,10 +10,11 @@ const props = defineProps({
     columns: Array,
     colNames: Array,
     showactions: Boolean,
+    showPagination: Boolean,
 });
 
 const emit = defineEmits(["data"]);
-const data = props.items.data;
+const data = props.items.data ? props.items.data : props.items ;
 const title = props.title;
 const route = props.route;
 const columns = props.columns;
@@ -45,7 +46,6 @@ const emitData = (item) => {
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 py-3">#</th>
                                 <th v-for="colName in colNames" :key="colName" scope="colName" class="px-4 py-3">
                                     {{ colName }}
                                 </th>
@@ -56,14 +56,9 @@ const emitData = (item) => {
                         </thead>
                         <tbody>
                             <tr v-for="item in data" :key="item.id" class="border-b dark:border-gray-700">
-                                <th scope="row"
-                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ item.id }}
-                                </th>
                                 <td v-for="col in columns" :key="col" class="px-4 py-3">
                                     {{ item[col] }}
                                 </td>
-
                                 <td class="flex items-center justify-end px-4 py-3" v-if="showactions">
                                     <button :id="'dropdownButton' + item.id" :data-dropdown-toggle="'dropdownMenu' + item.id
                                         "
@@ -112,7 +107,7 @@ const emitData = (item) => {
                         </tbody>
                     </table>
                 </div>
-                <Pagination :items="items" />
+                <Pagination v-if="showPagination" :items="items" />
             </div>
         </div>
     </section>

@@ -2,9 +2,9 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Head } from "@inertiajs/vue3";
-import AddEdit from "./AddEdit.vue";
-import DefaultModal from "@/Components/Modal.vue";
 import { ref } from "vue";
+import { Link } from "@inertiajs/vue3";
+
 defineProps({
     data: {
         type: Object,
@@ -13,36 +13,23 @@ defineProps({
 });
 
 const columns = [
-    "category_name",
+    'id',
 ];
 
 const colNames = [
-    "name",
+    "id",
 ];
 
-// const actions = ["show", "edit", "destroy"];
 
-const title = "categorie";
+const title = "orders";
 
-let selectedCategory = ref(null);
-let type = ref("");
-
-const handleCategoryData = (data) => {
-    type.value = "update";
-    selectedCategory.value = data;
-};
-
-const CreateCategory = () => {
-    type.value = "create";
-    selectedCategory.value = null;
-};
 
 
 </script>
 
 <template>
 
-    <Head title="category" />
+    <Head title="Order List" />
     <AdminLayout>
         <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
             <div class="w-full md:w-1/4">
@@ -67,11 +54,11 @@ const CreateCategory = () => {
                 class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                 <!-- Modal toggle -->
                 <div class="flex justify-center m-5">
-                    <button id="defaultModalButton" data-modal-target="defaultModal" data-modal-toggle="defaultModal"
+                    <Link :href="route('admin.order.create')"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        type="button" @click="CreateCategory" >
+                        type="button">
                         Add {{ title }}
-                    </button>
+                    </Link>
                 </div>
                 <div class="flex items-center w-full space-x-3 md:w-auto">
                     <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
@@ -158,13 +145,8 @@ const CreateCategory = () => {
             </div>
         </div>
         <!-- <CrudLayout></CrudLayout> -->
-        <Table :items="data" :title="title" :route="'categorie'" :columns="columns" :showactions="true" :colNames="colNames" @data="handleCategoryData">
+        <Table :items="data" :title="title" :route="'customer'" :columns="columns" :showactions="true"
+            :colNames="colNames" >
         </Table>
-        <DefaultModal :id="'defaultModal'">
-            <template #title> {{ type }} category </template>
-            <template #body>
-                <AddEdit :type="type" :data="selectedCategory" />
-            </template>
-        </DefaultModal>
     </AdminLayout>
 </template>

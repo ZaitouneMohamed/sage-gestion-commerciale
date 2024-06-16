@@ -99,9 +99,9 @@ import { Link } from "@inertiajs/vue3";
                     </button>
                     <ul id="dropdown-orders" class="hidden py-2 space-y-2">
                         <li>
-                            <Link :href="route('admin.categorie.index')"
+                            <Link :href="route('admin.order.list')"
                                 class="flex items-center w-full p-2 text-base font-medium text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            Categorie</Link>
+                            Orders List</Link>
                         </li>
                     </ul>
                 </li>

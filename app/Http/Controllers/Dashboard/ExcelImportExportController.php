@@ -17,4 +17,12 @@ class ExcelImportExportController extends Controller
         Excel::import(new ProductImport, $request->file);
         return back()->with('success', 'Excel Data Imported successfully.');
     }
+    public function ImportCategoris(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ]);
+        Excel::import(new ProductImport, $request->file);
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
 }
