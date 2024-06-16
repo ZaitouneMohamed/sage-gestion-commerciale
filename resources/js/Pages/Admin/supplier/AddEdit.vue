@@ -18,6 +18,16 @@ const form = useForm({
     email: props.data?.email || "",
 });
 
+function ClearForm() {
+    form.supplier_name = "";
+    form.contact_name = "";
+    form.address = "";
+    form.city = "";
+    form.postal_code = "";
+    form.phone = "";
+    form.email = "";
+}
+
 watch(
     () => props.data,
     (newData) => {
@@ -28,15 +38,32 @@ watch(
         form.postal_code = newData?.postal_code || "";
         form.phone = newData?.phone || "";
         form.email = newData?.email || "";
+        form.errors = {};
     },
     { immediate: true }
 );
 
 function submitForm() {
     if (props.type == "create") {
-        router.post('supplier', form)
+        router.post('supplier', form, {
+            onSuccess: () => {
+                ClearForm();
+                preserveState: false
+            },
+            onError: (errors) => {
+                form.errors = errors
+            }
+        })
     } else {
-        router.put('supplier/' + props.data.id, form)
+        router.put('supplier/' + props.data.id, form, {
+            onSuccess: () => {
+                ClearForm();
+                preserveState: false
+            },
+            onError: (errors) => {
+                form.errors = errors
+            }
+        })
     }
 }
 </script>
@@ -46,12 +73,11 @@ function submitForm() {
     <form @submit.prevent="submitForm">
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
-                form {{ form }} <br />
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">supplier name<span
                         class="text-red-500"> *</span></label>
                 <input type="text" v-model="form.supplier_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="categorie name" />
+                    placeholder="supplier name" />
                 <InputError :message="form.errors.supplier_name" class="mt-2" />
             </div>
             <div>

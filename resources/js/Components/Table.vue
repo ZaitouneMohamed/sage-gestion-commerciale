@@ -26,7 +26,9 @@ onMounted(() => {
 const deleteRecord = (id) => {
     if (confirm("Are you sure you want to delete this record?")) {
         const fullLink = route + "/" + id;
-        router.delete(fullLink)
+        router.delete(fullLink, {
+            preserveState: false,
+        })
     }
 };
 

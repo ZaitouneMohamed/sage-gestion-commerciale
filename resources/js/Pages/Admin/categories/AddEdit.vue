@@ -16,15 +16,32 @@ watch(
     () => props.data,
     (newData) => {
         form.category_name = newData?.category_name || "";
+        form.errors = {};
     },
     { immediate: true }
 );
 
 function submitForm() {
     if (props.type == "create") {
-        router.post('categorie', form)
+        router.post('categorie', form, {
+            onSuccess: () => {
+                form.category_name = ""
+                preserveState: false
+            },
+            onError: (errors) => {
+                form.errors = errors
+            }
+        })
     } else {
-        router.put('categorie/' + props.data.id, form)
+        router.put('categorie/' + props.data.id, form, {
+            onSuccess: () => {
+                form.category_name = ""
+                preserveState: false
+            },
+            onError: (errors) => {
+                form.errors = errors
+            }
+        })
     }
 }
 </script>

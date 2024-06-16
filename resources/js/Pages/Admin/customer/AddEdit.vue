@@ -32,15 +32,45 @@ watch(
         form.postal_code = newData?.postal_code || "";
         form.country = newData?.country || "";
         form.date_of_birth = newData?.date_of_birth || "";
+        form.errors = {};
     },
     { immediate: true }
 );
 
+function ClearForm() {
+    form.first_name = "";
+    form.last_name = "";
+    form.email = "";
+    form.phone = "";
+    form.address = "";
+    form.city = "";
+    form.postal_code = "";
+    form.country = "";
+    form.date_of_birth = "";
+}
+
 function submitForm() {
     if (props.type == "create") {
-        router.post('customer', form)
+        router.post('customer', form, {
+            onSuccess: () => {
+                ClearForm();
+                preserveState: false
+            },
+            onError: (errors) => {
+                form.errors = errors
+            }
+        })
     } else {
-        router.put('customer/' + props.data.id, form)
+        router.put('customer/' + props.data.id, form, {
+            preserveState: false,
+            onSuccess: () => {
+                preserveState: false
+                ClearForm();
+            },
+            onError: (errors) => {
+                form.errors = errors
+            }
+        })
     }
 }
 </script>
