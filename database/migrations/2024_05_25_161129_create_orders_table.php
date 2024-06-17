@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
             $table->dateTime('order_date');
-            $table->decimal('total_amount', 10, 2);
-            $table->string('order_status', 50);
+            $table->integer('order_status')->default(1);
             $table->timestamps();
         });
     }
