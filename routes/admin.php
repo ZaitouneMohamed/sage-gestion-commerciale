@@ -25,5 +25,6 @@ Route::middleware("auth")->name("admin.")->prefix('admin')->group(function () {
     Route::controller(OrderController::class)->name('order.')->group(function(){
         Route::get('orders-list','OrdersList')->name('list');
         Route::get('orders-create','CreateNewOrder')->name('create');
+        Route::post('StoreOrder','StoreOrder')->name('StoreOrder');
     });
 });

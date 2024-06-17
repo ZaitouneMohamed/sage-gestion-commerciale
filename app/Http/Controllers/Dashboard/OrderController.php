@@ -14,16 +14,20 @@ class OrderController extends Controller
     public function OrdersList()
     {
         $data = Order::paginate(15);
-        return Inertia::render('Admin/orders/Index',compact('data'));
-        }
+        return Inertia::render('Admin/orders/Index', compact('data'));
+    }
 
-        public function CreateNewOrder()
-        {
-            $data = [
-                "products" => Product::all(),
-                "clients" => Customer::all(),
-            ];
-        return Inertia::render('Admin/orders/Create',compact('data'));
+    public function CreateNewOrder()
+    {
+        $data = [
+            "products" => Product::all(),
+            "clients" => Customer::all(),
+        ];
+        return Inertia::render('Admin/orders/Create', compact('data'));
+    }
 
+    public function StoreOrder(Request $request)
+    {
+        dd($request->all());
     }
 }

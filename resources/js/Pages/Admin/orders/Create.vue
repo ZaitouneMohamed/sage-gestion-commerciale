@@ -65,7 +65,7 @@
                 <Table :items="selectedProducts" :columns="columns" :showactions="true" :colNames="colNames">
                     <template #actions="{ item }">
                         <td class="px-6 py-4">
-                            <button @click="GetProductInfo(item.ref)"
+                            <button @click="GetProductInfo(item.ref)" type="button"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                         </td>
                     </template>
