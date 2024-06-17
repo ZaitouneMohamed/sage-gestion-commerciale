@@ -24,7 +24,7 @@ class CustomerFactory extends Factory
             'address' => $this->faker->address,
             'city' => $this->faker->city,
             'postal_code' => $this->faker->postcode,
-            'country' => $this->faker->country,
+            // 'country' => $this->faker->country,
             'date_of_birth' => $this->faker->date(),
             'created_at' => now(),
             'updated_at' => now(),
