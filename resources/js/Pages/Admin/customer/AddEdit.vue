@@ -79,7 +79,6 @@ function submitForm() {
 <template>
     <form @submit.prevent="submitForm">
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
-            form {{ form }} <br />
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">first name<span
                         class="text-red-500"> *</span></label>

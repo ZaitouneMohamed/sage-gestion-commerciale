@@ -46,7 +46,6 @@ function submitForm() {
     <form @submit.prevent="submitForm">
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
-                form {{ form }} <br />
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">supplier name<span
                         class="text-red-500"> *</span></label>
                 <input type="text" v-model="form.supplier_name"

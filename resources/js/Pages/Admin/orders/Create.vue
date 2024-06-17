@@ -59,11 +59,16 @@
                             placeholder="Amount">
                     </div>
                     <button type="button" @click="addProductToSelected"
-                        class="px-4 py-2 bg-blue-500 text-white rounded-md">Add 
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md">Add
                         Product</button>
                 </div>
-                <Table :items="selectedProducts" :title="title" :route="'customer'" :columns="columns"
-                    :showactions="false" :colNames="colNames" :showPagination="false">
+                <Table :items="selectedProducts" :columns="columns" :showactions="true" :colNames="colNames">
+                    <template #actions="{ item }">
+                        <td class="px-6 py-4">
+                            <button @click="GetProductInfo(item.ref)"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                        </td>
+                    </template>
                 </Table>
                 <div class="flex items-center space-x-4">
 
@@ -92,6 +97,7 @@ const columns = [
 
 const selectedProducts = ref([]);
 const selectedProduct = ref({
+    id: null,
     ref: '',
     name: '',
     price: '',
@@ -100,16 +106,6 @@ const selectedProduct = ref({
     netPrice: '',
     amount: ''
 });
-
-const recalculate = () => {
-    const price = parseFloat(selectedProduct.value.price) || 0;
-    const quantity = parseInt(selectedProduct.value.quantity) || 0;
-    const remise = parseFloat(selectedProduct.value.remise) || 0;
-
-    selectedProduct.value.netPrice = price - (price * (remise / 100));
-
-    selectedProduct.value.amount = selectedProduct.value.netPrice * quantity;
-};
 
 watch(
     () => ({
@@ -122,7 +118,6 @@ watch(
         const quantity = parseInt(selectedProduct.value.quantity) || 0;
         const remise = parseFloat(selectedProduct.value.remise) || 0;
 
-        // Calculate netPrice
         selectedProduct.value.netPrice = price - (price * (remise / 100));
 
         selectedProduct.value.amount = selectedProduct.value.netPrice * quantity;
@@ -136,6 +131,7 @@ const updateProductInfo = () => {
     const product = props.data.products.find(item => item.id == selectedProductId);
     if (product) {
         selectedProduct.value = {
+            id: product.id,
             ref: product.ref,
             name: product.name,
             price: product.price,
@@ -147,16 +143,47 @@ const updateProductInfo = () => {
     }
 };
 
-const GetProductInfo = () => {
-    const selectedProductId = document.getElementById('product').value;
-    const product = props.data.products.find(item => item.id == selectedProductId);
-    selectedProduct.value.push(product);
+const ClearProductInfo = () => {
+    selectedProduct.value = {
+        id: null,
+        ref: null,
+        name: null,
+        price: null,
+        quantity: null,
+        remise: null,
+        netPrice: null,
+        amount: null
+    };
+
+};
+
+const GetProductInfo = (ref) => {
+    const product = props.data.products.find(item => item.ref == ref);
+    if (product) {
+        selectedProduct.value = {
+            id: product.id,
+            ref: product.ref,
+            name: product.name,
+            price: product.price,
+            quantity: 1,
+            remise: 0,
+            netPrice: product.price - (product.price * (selectedProduct.value.remise / 100)),
+            amount: product.price * selectedProduct.value.quantity
+        };
+    }
 };
 
 
 const addProductToSelected = () => {
-    if (selectedProduct.value && !selectedProducts.value.find(item => item.ref == selectedProduct.value.red)) {
-        selectedProducts.value.push({ ...selectedProduct.value });
+    if (selectedProduct.value) {
+        const existingProductIndex = selectedProducts.value.findIndex(item => item.id == selectedProduct.value.id);
+        if (existingProductIndex === -1) {
+            selectedProducts.value.push({ ...selectedProduct.value });
+            ClearProductInfo()
+        } else {
+            selectedProducts.value[existingProductIndex] = { ...selectedProduct.value };
+            ClearProductInfo()
+        }
     }
 };
 
