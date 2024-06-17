@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function OrdersList()
     {
-        $data = Order::paginate(15);
+        $data = Order::latest()->paginate(15);
         return Inertia::render('Admin/orders/Index', compact('data'));
     }
 
@@ -28,6 +28,29 @@ class OrderController extends Controller
 
     public function StoreOrder(Request $request)
     {
-        dd($request->all());
+        $this->validate($request, [
+            "customer" => "required|exists:customers,id",
+            "date" => "required|date"
+        ]);
+        try {
+            $order = Order::create([
+                "customer_id" => $request->customer,
+                "order_date" => $request->date,
+            ]);
+            foreach ($request->selectedProducts as $item) {
+                $order->orderDetails()->create([
+                    'product_name' => $item['name'],
+                    'product_ref' => $item['ref'],
+                    'product_price' => $item['price'],
+                    'quantity' => $item['quantity'],
+                    'remise' => $item['remise']
+                ]);
+            }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+        return redirect()->route("admin.order.list")->with([
+            "success" => "Order create with success"
+        ]);
     }
 }

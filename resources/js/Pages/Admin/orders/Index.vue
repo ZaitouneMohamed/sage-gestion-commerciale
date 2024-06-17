@@ -14,10 +14,16 @@ defineProps({
 
 const columns = [
     'id',
+    "order_date",
+    "order_amount",
+    "order_status",
 ];
 
 const colNames = [
     "id",
+    "date",
+    "amount",
+    "status",
 ];
 
 
