@@ -2,6 +2,7 @@
 
     <Head title="Create Order" />
     <AdminLayout title="create New Order">
+        {{ form }}
         <section class="bg-white dark:bg-gray-900">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Create Order</h2>
             <form action="#">
@@ -9,10 +10,10 @@
                     <div>
                         <label for="category"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Costumer</label>
-                        <select id="category"
+                        <select id="category" v-model="form.customer"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select Customar</option>
-                            <option v-for="item in data.clients" value="{{ item.id }}">{{ item.first_name }}
+                            <option selected value="">Select Customar</option>
+                            <option v-for="item in data.clients" :value="item.id">{{ item.first_name }}
                                 {{ item.last_name }}</option>
                         </select>
                     </div>
@@ -21,7 +22,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
                         <input type="date" name="date" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            v-model="currentDate" required>
+                            v-model="form.date" required>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="product"
@@ -61,18 +62,21 @@
                     <button type="button" @click="addProductToSelected"
                         class="px-4 py-2 bg-blue-500 text-white rounded-md">Add
                         Product</button>
+                    {{ form.selectedProducts.length }}
+                    <button type="button" @click="submitForm"
+                        v-if="form.selectedProducts.length > 0 && form.customer != '' && form.customer != null && form.date != null"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md">Validate Form</button>
                 </div>
-                <Table :items="selectedProducts" :columns="columns" :showactions="true" :colNames="colNames">
+                <Table :items="form.selectedProducts" :columns="columns" :showactions="true" :colNames="colNames">
                     <template #actions="{ item }">
                         <td class="px-6 py-4">
                             <button @click="GetProductInfo(item.ref)" type="button"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                            <button @click="DeleteProductFromSelected(item.ref)" type="button"
+                                class="font-medium text-red-600 dark:text-blue-500 hover:underline">delete</button>
                         </td>
                     </template>
                 </Table>
-                <div class="flex items-center space-x-4">
-
-                </div>
             </form>
         </section>
     </AdminLayout>
@@ -80,10 +84,21 @@
 
 <script setup>
 import Table from "@/Components/Table.vue";
-
+import { useForm, router } from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
+
+const submitForm = () => {
+    router.post('StoreOrder', form, {
+        onSuccess: () => {
+            preserveState: false
+        },
+        onError: (errors) => {
+            form.errors = errors
+        }
+    })
+};
 
 const columns = [
     'ref',
@@ -95,16 +110,21 @@ const columns = [
     'amount',
 ];
 
-const selectedProducts = ref([]);
+const form = useForm({
+    date: ref(new Date().toISOString().substr(0, 10)),
+    customer: null,
+    selectedProducts: []
+});
+
 const selectedProduct = ref({
     id: null,
     ref: '',
     name: '',
-    price: '',
-    quantity: '',
-    remise: '',
-    netPrice: '',
-    amount: ''
+    price: 0,
+    quantity: 1,
+    remise: 0,
+    netPrice: 0,
+    amount: 0
 });
 
 watch(
@@ -115,16 +135,14 @@ watch(
     }),
     () => {
         const price = parseFloat(selectedProduct.value.price) || 0;
-        const quantity = parseInt(selectedProduct.value.quantity) || 0;
+        const quantity = parseInt(selectedProduct.value.quantity) || 1;
         const remise = parseFloat(selectedProduct.value.remise) || 0;
 
         selectedProduct.value.netPrice = price - (price * (remise / 100));
-
         selectedProduct.value.amount = selectedProduct.value.netPrice * quantity;
     },
     { immediate: true }
 );
-
 
 const updateProductInfo = () => {
     const selectedProductId = document.getElementById('product').value;
@@ -137,8 +155,8 @@ const updateProductInfo = () => {
             price: product.price,
             quantity: 1,
             remise: 0,
-            netPrice: product.price - (product.price * (selectedProduct.value.remise / 100)),
-            amount: product.price * selectedProduct.value.quantity
+            netPrice: product.price,
+            amount: product.price * 1
         };
     }
 };
@@ -146,15 +164,14 @@ const updateProductInfo = () => {
 const ClearProductInfo = () => {
     selectedProduct.value = {
         id: null,
-        ref: null,
-        name: null,
-        price: null,
-        quantity: null,
-        remise: null,
-        netPrice: null,
-        amount: null
+        ref: '',
+        name: '',
+        price: 0,
+        quantity: 1,
+        remise: 0,
+        netPrice: 0,
+        amount: 0
     };
-
 };
 
 const GetProductInfo = (ref) => {
@@ -167,26 +184,32 @@ const GetProductInfo = (ref) => {
             price: product.price,
             quantity: 1,
             remise: 0,
-            netPrice: product.price - (product.price * (selectedProduct.value.remise / 100)),
-            amount: product.price * selectedProduct.value.quantity
+            netPrice: product.price,
+            amount: product.price * 1
         };
     }
 };
 
-
 const addProductToSelected = () => {
     if (selectedProduct.value) {
-        const existingProductIndex = selectedProducts.value.findIndex(item => item.id == selectedProduct.value.id);
+        const existingProductIndex = form.selectedProducts.findIndex(item => item.id == selectedProduct.value.id);
         if (existingProductIndex === -1) {
-            selectedProducts.value.push({ ...selectedProduct.value });
-            ClearProductInfo()
+            form.selectedProducts.push({ ...selectedProduct.value });
+            ClearProductInfo();
         } else {
-            selectedProducts.value[existingProductIndex] = { ...selectedProduct.value };
-            ClearProductInfo()
+            form.selectedProducts[existingProductIndex] = { ...selectedProduct.value };
+            ClearProductInfo();
         }
     }
 };
 
+const DeleteProductFromSelected = (ref) => {
+    const existingProductIndex = form.selectedProducts.findIndex(item => item.ref == ref);
+    if (existingProductIndex !== -1) {
+        form.selectedProducts.splice(existingProductIndex, 1);
+        ClearProductInfo();
+    }
+};
 
 const colNames = [
     "ref",
