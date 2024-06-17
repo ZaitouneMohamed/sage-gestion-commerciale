@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\CustomarController;
 use App\Http\Controllers\Dashboard\ExcelImportExportController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\PdfController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +27,9 @@ Route::middleware("auth")->name("admin.")->prefix('admin')->group(function () {
         Route::get('orders-list','OrdersList')->name('list');
         Route::get('orders-create','CreateNewOrder')->name('create');
         Route::post('StoreOrder','StoreOrder')->name('StoreOrder');
+    });
+
+    Route::controller(PdfController::class)->name('pdf.')->group(function(){
+        Route::get('facture/{order}' , 'Facture')->name('facture');
     });
 });

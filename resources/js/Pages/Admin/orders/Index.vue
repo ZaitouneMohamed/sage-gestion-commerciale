@@ -3,7 +3,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 defineProps({
     data: {
@@ -63,7 +63,7 @@ const title = "orders";
                     <Link :href="route('admin.order.create')"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                         type="button">
-                        Add {{ title }}
+                    Add {{ title }}
                     </Link>
                 </div>
                 <div class="flex items-center w-full space-x-3 md:w-auto">
@@ -151,8 +151,13 @@ const title = "orders";
             </div>
         </div>
         <!-- <CrudLayout></CrudLayout> -->
-        <Table :items="data" :title="title" :route="'customer'" :columns="columns" :showactions="true"
-            :colNames="colNames" >
+        <Table :items="data" :title="title" :columns="columns" :showactions="true"
+            :colNames="colNames">
+            <template #actions="{ item }">
+                <a :href="route('admin.pdf.facture' , item)" target="_blank"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><i
+                        class="fa-solid fa-file-pdf"></i></a>
+            </template>
         </Table>
     </AdminLayout>
 </template>
