@@ -5,6 +5,7 @@ import { Head, useForm, router } from "@inertiajs/vue3";
 import AddEdit from "./AddEdit.vue";
 import DefaultModal from "@/Components/Modal.vue";
 import { ref } from "vue";
+import Pagination from "@/Components/Pagination.vue";
 defineProps({
     data: {
         type: Object,
@@ -167,6 +168,7 @@ const CreateProduct = () => {
                 </div>
             </template>
         </Table>
+        <Pagination :items="data" />
         <DefaultModal :id="'defaultModal'">
             <template #title> {{ type }} Product </template>
             <template #body>

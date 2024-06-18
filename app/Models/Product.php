@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\CompanyScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,16 @@ class Product extends Model
         'tva',
         'category_id',
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new CompanyScope);
+    }
+
+    public function Company()
+    {
+        return $this->belongsTo(Company::class);
+    }
     protected $appends = [
         'category_name',
         'supplier_name',

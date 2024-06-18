@@ -6,6 +6,10 @@ use {{ namespacedModel }};
 
 class {{ class }}
 {
+    public function creating({{ model }} ${{ modelVariable }}): void
+    {
+        //
+    }
     /**
      * Handle the {{ model }} "created" event.
      */
