@@ -15,7 +15,7 @@ cd facturation-systeme
 ## Install PHP Dependencies:
 
 ```bash
-composer install 
+composer install || composer update
 ```
 
 ## Install NPM/Yarn Dependencies:
