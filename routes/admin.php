@@ -10,12 +10,12 @@ use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SupplierController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware("auth")->name("admin.")->prefix('admin')->group(function () {
-    Route::controller(HomeController::class)->group(function(){
-        Route::get('/' , 'index')->name('home');
+Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->group(function () {
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/', 'index')->name('home');
     });
-    Route::controller(ExcelImportExportController::class)->name('excel.')->group(function(){
-        Route::post('importProduct' , 'ImportProducts')->name('import.product');
+    Route::controller(ExcelImportExportController::class)->name('excel.')->group(function () {
+        Route::post('importProduct', 'ImportProducts')->name('import.product');
     });
     Route::resource('categorie', CategorieController::class);
     Route::resource('customer', CustomarController::class);
@@ -23,13 +23,13 @@ Route::middleware("auth")->name("admin.")->prefix('admin')->group(function () {
     Route::resource('product', ProductController::class);
 
     // Order Routes
-    Route::controller(OrderController::class)->name('order.')->group(function(){
-        Route::get('orders-list','OrdersList')->name('list');
-        Route::get('orders-create','CreateNewOrder')->name('create');
-        Route::post('StoreOrder','StoreOrder')->name('StoreOrder');
+    Route::controller(OrderController::class)->name('order.')->group(function () {
+        Route::get('orders-list', 'OrdersList')->name('list');
+        Route::get('orders-create', 'CreateNewOrder')->name('create');
+        Route::post('StoreOrder', 'StoreOrder')->name('StoreOrder');
     });
 
-    Route::controller(PdfController::class)->name('pdf.')->group(function(){
-        Route::get('facture/{order}' , 'Facture')->name('facture');
+    Route::controller(PdfController::class)->name('pdf.')->group(function () {
+        Route::get('facture/{order}', 'Facture')->name('facture');
     });
 });

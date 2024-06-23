@@ -17,9 +17,18 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      */
-    public function version(Request $request): string|null
+    public function version(Request $request)
     {
-        return parent::version($request);
+        return $this->rootView . parent::version($request);
+    }
+
+    public function handle(Request $request, \Closure $next, $rootView = null)
+    {
+        if ($rootView) {
+            $this->rootView = $rootView;
+        }
+
+        return parent::handle($request, $next);
     }
 
     /**
