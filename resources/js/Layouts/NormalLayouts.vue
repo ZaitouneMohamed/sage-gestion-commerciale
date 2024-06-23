@@ -2,6 +2,12 @@
 import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import { Head, Link } from "@inertiajs/vue3";
+import '../assets/css/swiper-bundle.min.css';
+import '../assets/css/animate.css';
+import '../assets/css/tailwind.css';
+// import '../assets/js/wow.min.js';
+import '../assets/js/swiper-bundle.min.js';
+// import '../assets/js/main.js';
 
 // initialize components based on data attribute selectors
 onMounted(() => {
