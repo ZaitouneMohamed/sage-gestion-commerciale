@@ -40,7 +40,7 @@ onMounted(() => {
                                 <td v-for="col in columns" :key="col" class="px-4 py-3">
                                     {{ item[col] }}
                                 </td>
-                                <td v-if="showactions" class="flex items-center justify-end px-4 py-3">
+                                <td v-if="showactions" class="p-4 space-x-2 whitespace-nowrap">
                                     <slot name="actions" :item="item"></slot>
                                 </td>
                             </tr>
