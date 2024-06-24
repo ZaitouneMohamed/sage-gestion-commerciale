@@ -72,7 +72,7 @@ onMounted(() => {
                                         Blog
                                     </a>
                                 </li>
-                                <li class="relative submenu-item group">
+                                <!-- <li class="relative submenu-item group">
                                     <a href="javascript:void(0)"
                                         class="relative flex items-center justify-between py-2 mx-8 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10">
                                         Pages
@@ -118,7 +118,7 @@ onMounted(() => {
                                             404 Page
                                         </a>
                                     </div>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                     </div>
@@ -165,14 +165,14 @@ onMounted(() => {
                             </span>
                         </label>
                         <div class="hidden sm:flex">
-                            <a href="signin.html"
+                            <Link :href="route('login')"
                                 class="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70">
                                 Sign In
-                            </a>
-                            <a href="signup.html"
+                            </Link>
+                            <Link :href="route('register')"
                                 class="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out bg-white rounded-md signUpBtn bg-opacity-20 hover:bg-opacity-100 hover:text-dark">
                                 Sign Up
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
