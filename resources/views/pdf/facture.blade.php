@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Factutre N° {{ $order->id }} - {{ date('Y') }}  </title>
+    <title>Factutre N° {{ $order->id }} - {{ date('Y') }} </title>
     <style>
         .page-break {
             page-break-after: always;
@@ -39,12 +39,21 @@
                 <img style="margin-top: 50px"
                     src="https://veryfrais.com/public/storage/restaurant/2022-09-23-632d303dc15f3.png" width="160px"
                     height="75px" /><br>
-                <b>Phone :</b> 0600038001 <br>
-                <b>email :</b> support@veryfrais.com <br>
-                <b>adresse :</b> ANGLE BD ABDELMOUMEN <br> & RUE SOUMAYA RES SHEHRAZADE <br> 3 ETG 4 N 20
-                Casablanca<br><br>
-                <b>ICE :</b>003068414000037 <br>
-                <br><br><br><br><br><br><br><br>
+            </td>
+            <td>
+                <b>Date</b> : {{ $order->order_date }} <br>
+                <b>Facture N° : </b> {{ $order->id }} - {{ date('Y') }} <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Veryfrais </p> <br>
+                <p>ANGLE BD ABDELMOUMEN
+                    & RUE SOUMAYA RES
+                    SHEHRAZADE 3 ETG 4 N20
+                    20100, Casablanca</p> <br>
+                <b>Telephone : </b> 0600000000 <br>
+                <b>email : </b> <br>
             </td>
             <td>
                 <b>Commande N° : </b> {{ $order->id }} - {{ date('Y') }} <br>
@@ -56,6 +65,8 @@
             </td>
         </tr>
     </table>
+    <br><br><br>
+    <br><br><br>
     <table style="width:100%;border-collapse:collapse">
         <thead>
             <tr>
@@ -82,24 +93,24 @@
                     <td style="border: 1px solid black">{{ $item->quantity * $item->product_price }} </td>
                 </tr>
                 @if ($loop->last)
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="border: 1px solid black">Prix HT</td>
-                    <td style="border: 1px solid black">{{ $fullprice }} </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="border: 1px solid black">Prix Livraision</td>
-                    <td style="border: 1px solid black">50</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td style="border: 1px solid black">Total</td>
-                    <td style="border: 1px solid black">{{ $fullprice + 50 }} </td>
-                </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid black">Prix HT</td>
+                        <td style="border: 1px solid black">{{ $fullprice }} </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid black">Prix Livraision</td>
+                        <td style="border: 1px solid black">50</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td style="border: 1px solid black">Total</td>
+                        <td style="border: 1px solid black">{{ $fullprice + 50 }} </td>
+                    </tr>
                 @endif
             @endforeach
         </tbody>
@@ -110,7 +121,6 @@
         CNSS:
         4537783 - EMAIL: <b>support@veryfrais.com</b>
     </footer>
-    <div class="page-break"></div>
 
 
 </body>
