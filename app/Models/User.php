@@ -28,7 +28,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Company::class);
     }
-
+    public function Mouvement()
+    {
+        return $this->hasMany(Mouvement::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
