@@ -14,6 +14,7 @@ class Product extends Model
         'name',
         'price',
         'price_f',
+        'qty',
         'tva',
         'category_id',
     ];
@@ -49,5 +50,9 @@ class Product extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);
+    }
+    public function Mouvement()
+    {
+        return $this->hasMany(Mouvement::class);
     }
 }

@@ -14,4 +14,15 @@ class {{ class }} extends Model
     protected $fillable = [
 
     ];
+
+    static public function getData()
+    {
+        $data = self::select("table_name.*");
+
+        // if (Request()->get('name')) {
+        //     $data = $data->where('name', 'like', '%' . Request()->get('name') . '%');
+        // }
+
+        return $data->latest()->paginate(10);
+    }
 }

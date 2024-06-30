@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\CategorieController;
 use App\Http\Controllers\Dashboard\CustomarController;
 use App\Http\Controllers\Dashboard\ExcelImportExportController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\MouvementController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PdfController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -21,6 +22,7 @@ Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->gro
     Route::resource('customer', CustomarController::class);
     Route::resource('supplier', SupplierController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('mouvement', MouvementController::class);
 
     // Order Routes
     Route::controller(OrderController::class)->name('order.')->group(function () {

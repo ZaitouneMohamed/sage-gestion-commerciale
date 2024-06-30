@@ -18,7 +18,7 @@ const columns = [
     'name',
     'price',
     'price_f',
-    'tva',
+    'qty',
     'category_name',
     'supplier_name',
 ];
@@ -28,7 +28,7 @@ const colNames = [
     'name',
     'Price',
     'Price facture',
-    'Stock tva',
+    'qty',
     'Category Name',
     'Supplier Name'
 ];
