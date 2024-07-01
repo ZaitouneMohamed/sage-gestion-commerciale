@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\CategorieController;
+use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\CustomarController;
 use App\Http\Controllers\Dashboard\ExcelImportExportController;
 use App\Http\Controllers\Dashboard\HomeController;
@@ -29,6 +30,11 @@ Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->gro
         Route::get('orders-list', 'OrdersList')->name('list');
         Route::get('orders-create', 'CreateNewOrder')->name('create');
         Route::post('StoreOrder', 'StoreOrder')->name('StoreOrder');
+    });
+
+    Route::controller(CompanyController::class)->name('settings.')->group(function () {
+        Route::get('settings', 'index')->name('index');
+        Route::post('settings-edit', 'update')->name('update');
     });
 
     Route::controller(PdfController::class)->name('pdf.')->group(function () {
