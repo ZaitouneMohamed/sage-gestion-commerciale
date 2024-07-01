@@ -38,7 +38,8 @@
             "Tests\\": "tests/"
         },
         "files":[
-            "app/Services/GlobalServices.php"
+            "app/Services/GlobalServices.php",
+            "app/Services/ImagesServices.php"
         ]
     },
     "scripts": {

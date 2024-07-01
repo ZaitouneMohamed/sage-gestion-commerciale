@@ -2,7 +2,6 @@
 
     <Head title="Create Order" />
     <AdminLayout title="create New Order">
-        {{ form }}
         <section class="bg-white dark:bg-gray-900">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Create Order</h2>
             <form action="#">
@@ -38,34 +37,34 @@
                     <!-- Inputs styled like table headers -->
                     <div class="grid gap-4 mb-4 sm:grid-cols-8">
                         <input type="text" v-model="selectedProduct.ref"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Ref">
                         <input type="text" v-model="selectedProduct.name"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Name">
                         <input type="text" v-model="selectedProduct.price"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="P.U HT">
                         <input type="text" v-model="selectedProduct.quantity"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Quantity">
                         <input type="text" v-model="selectedProduct.remise"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Remise">
                         <input type="text" v-model="selectedProduct.netPrice"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="P.U NET">
                         <input type="text" v-model="selectedProduct.amount"
-                            class="px-4 py-3 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            class="block w-full px-4 py-3 text-xs text-gray-700 uppercase border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-700 dark:text-gray-400 focus:ring-primary-500 focus:border-primary-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Amount">
                     </div>
                     <button type="button" @click="addProductToSelected"
-                        class="px-4 py-2 bg-blue-500 text-white rounded-md">Add
+                        class="px-4 py-2 text-white bg-blue-500 rounded-md">Add
                         Product</button>
                     {{ form.selectedProducts.length }}
                     <button type="button" @click="submitForm"
                         v-if="form.selectedProducts.length > 0 && form.customer != '' && form.customer != null && form.date != null"
-                        class="px-4 py-2 bg-blue-500 text-white rounded-md">Validate Form</button>
+                        class="px-4 py-2 text-white bg-blue-500 rounded-md">Validate Form</button>
                 </div>
                 <Table :items="form.selectedProducts" :columns="columns" :showactions="true" :colNames="colNames">
                     <template #actions="{ item }">
