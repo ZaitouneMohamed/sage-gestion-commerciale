@@ -18,7 +18,7 @@ const columns = [
     'name',
     'price',
     'price_f',
-    'qty',
+    'Qty',
     'category_name',
     'supplier_name',
 ];

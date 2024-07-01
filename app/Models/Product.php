@@ -14,7 +14,6 @@ class Product extends Model
         'name',
         'price',
         'price_f',
-        'qty',
         'tva',
         'category_id',
     ];
@@ -31,6 +30,7 @@ class Product extends Model
     protected $appends = [
         'category_name',
         'supplier_name',
+        'Qty'
     ];
 
     public function getCategoryNameAttribute(): string
@@ -54,5 +54,12 @@ class Product extends Model
     public function Mouvement()
     {
         return $this->hasMany(Mouvement::class);
+    }
+    //
+    public function getQtyAttribute(): float
+    {
+        $entree = $this->Mouvement()->where('type' , 'entree')->sum("qte");
+        $sortie = $this->Mouvement()->where('type' , 'sortie')->sum("qte");
+        return $entree - $sortie;
     }
 }
