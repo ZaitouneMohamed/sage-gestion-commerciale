@@ -36,12 +36,6 @@ class MouvementController extends Controller
 
         Mouvement::create($validatedData);
 
-        try {
-            $this->globalServices->EditQtyProductAfterMouvement($request->product_id, $request->qte, $request->type);
-        } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
-        }
-
         return redirect()->route('admin.mouvement.index')->with([
             'success' => "Mouvement created successfully"
         ]);
@@ -70,7 +64,10 @@ class MouvementController extends Controller
     public function update(Request $request, Mouvement $mouvement)
     {
         $this->validate($request, [
+            'product_id' => "required|exists:products,id",
             'motif' => "required|numeric",
+            'type' => "required|in:entree,sortie",
+            'qte' => "required|numeric",
         ]);
         $mouvement->update($request->all());
         return redirect()->route('admin.mouvement.index')->with([
