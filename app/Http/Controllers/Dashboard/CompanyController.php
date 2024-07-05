@@ -28,6 +28,10 @@ class CompanyController extends Controller
     }
     public function update(Request $request)
     {
+        // dd($request->all());
+        $this->validate($request,[
+            "company_name"=>"required",
+        ]);
         $user = User::findOrFail(auth()->id())->load('Company');
 
         if ($request->hasFile('image')) {
@@ -44,6 +48,8 @@ class CompanyController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Company image updated successfully.');
+        $user->Company->update($request->all());
+
+        return redirect()->back()->with('success', 'Company data updated successfully.');
     }
 }

@@ -54,10 +54,10 @@ function submitForm() {
         router.post('customer', form, {
             onSuccess: () => {
                 ClearForm();
-                preserveState: false
             },
+            preserveState: (page) => Object.keys(page.props.errors).length > 0,
             onError: (errors) => {
-                form.errors = errors
+                form.errors = errors;
             }
         })
     } else {
