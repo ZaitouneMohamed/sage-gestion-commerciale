@@ -14,8 +14,9 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $data = Categorie::latest()->paginate(7);
-        return Inertia::render('Admin/categories/Index', compact('data'));
+        $data = Categorie::latest()->where('parent_id' , null)->with('children')->paginate(7);
+        $categories= Categorie::where('parent_id' , null)->get();
+        return Inertia::render('Admin/categories/Index', compact('data',"categories"));
     }
 
     /**

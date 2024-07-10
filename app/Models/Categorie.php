@@ -15,6 +15,21 @@ class Categorie extends Model
         'parent_id',
         'company_id',
     ];
+
+    protected $append = [
+        "category_children"
+    ];
+
+    public function getCategoryChildrenAttribute()
+    {
+        $children = [];
+        foreach ($this->children as $child) {
+            $children[] = $child;
+            $children = array_merge($children, $child->children);
+        }
+        return $children;
+    }
+
     public function Company()
     {
         return $this->belongsTo(Company::class);
