@@ -6,6 +6,7 @@ const props = defineProps({
     columns: Array,
     colNames: Array,
     showactions: Boolean,
+    showTrFromView: Boolean,
 });
 
 const emit = defineEmits(["data"]);
@@ -36,13 +37,16 @@ onMounted(() => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in data" :key="item.id" class="border-b dark:border-gray-700">
+                            <tr v-for="item in data" :key="item.id" class="border-b dark:border-gray-700" v-if="showTrFromView">
                                 <td v-for="col in columns" :key="col" class="px-4 py-3">
                                     {{ item[col] }}
                                 </td>
                                 <td v-if="showactions" class="p-4 space-x-2 whitespace-nowrap">
                                     <slot name="actions" :item="item"></slot>
                                 </td>
+                            </tr>
+                            <tr v-else class="border-b dark:border-gray-700" v-for="item in data" :key="item.id" >
+                                <slot name="dataFromView" :item="item"></slot>
                             </tr>
                         </tbody>
                     </table>

@@ -5,17 +5,20 @@ import InputError from "@/Components/InputError.vue";
 
 const props = defineProps({
     data: Object,
+    categories: Object,
     type: String,
 });
 
 const form = useForm({
     category_name: props.data?.category_name || "",
+    parent_id: props.data?.parent_id || "",
 });
 
 watch(
     () => props.data,
     (newData) => {
         form.category_name = newData?.category_name || "";
+        form.parent_id = newData?.parent_id || "";
         form.errors = {};
     },
     { immediate: true }
@@ -26,7 +29,7 @@ function submitForm() {
         router.post('categorie', form, {
             onSuccess: () => {
                 form.category_name = ""
-                preserveState: false
+                preserveState: (page) => Object.keys(page.props.errors).length > 0
             },
             onError: (errors) => {
                 form.errors = errors
@@ -36,7 +39,7 @@ function submitForm() {
         router.put('categorie/' + props.data.id, form, {
             onSuccess: () => {
                 form.category_name = ""
-                preserveState: false
+                preserveState: (page) => Object.keys(page.props.errors).length > 0
             },
             onError: (errors) => {
                 form.errors = errors
@@ -49,15 +52,24 @@ function submitForm() {
 
 <template>
     <form @submit.prevent="submitForm">
+        {{ data }}
         <div class="grid gap-4 mb-4 sm:grid-cols-2">
             <div>
-                form {{ form }} <br />
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">categorie name<span
                         class="text-red-500"> *</span></label>
                 <input type="text" v-model="form.category_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="categorie name" />
                 <InputError :message="form.errors.category_name" class="mt-2" />
+            </div>
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">categorie Parent</label>
+                <select id="category" v-model="form.parent_id"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option selected value="">Select Categorie</option>
+                    <option v-for="item in categories" :value="item.id">{{ item.category_name }}</option>
+                </select>
+                <InputError :message="form.errors.parent_id" class="mt-2" />
             </div>
         </div>
         <button type="submit" :disabled="form.processing"
