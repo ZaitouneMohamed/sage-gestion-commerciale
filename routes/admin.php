@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\MouvementController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PdfController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,11 @@ Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->gro
     Route::controller(CompanyController::class)->name('settings.')->group(function () {
         Route::get('settings', 'index')->name('index');
         Route::post('settings-edit', 'update')->name('update');
+    });
+    // settings
+    Route::controller(SettingsController::class)->name('setting.')->group(function () {
+        Route::get('setting', 'index')->name('index');
+        // Route::post('settings-edit', 'update')->name('update');
     });
 
     Route::controller(PdfController::class)->name('pdf.')->group(function () {

@@ -11,6 +11,7 @@ class PdfController extends Controller
 {
     public function Facture(Order $order)
     {
+        // dd($order);
         $pdf = PDF::loadView('pdf.facture', compact('order'));
         return $pdf->stream('facture.pdf');
     }

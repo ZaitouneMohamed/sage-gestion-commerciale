@@ -18,20 +18,8 @@ class Company extends Model
         'company_phone',
         'company_address',
         'company_tax',
+        'company_ice',
         'telegram_channel',
-        'default_date_format',
-        'default_language',
-        'invoice_footer_text',
-        'invoice_header',
-        'show_email',
-        'show_address',
-        'show_order_tax',
-        'show_discount',
-        'show_shipping',
-        'backup_status',
-        'backup_schedule',
-        'receipt_printer_type',
-        'printer_id',
     ];
 
     protected $appends = [
@@ -44,7 +32,7 @@ class Company extends Model
 
     public function getCompanyLogoAttribute()
     {
-        return $this->Image ? asset("images/Company/" . $this->Image->url) : 'aaaa';
+        return $this->Image ? asset("images/Company/" . $this->Image->url) : '';
     }
 
 }

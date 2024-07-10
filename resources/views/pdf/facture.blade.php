@@ -35,27 +35,22 @@
 <body>
     <table style="width:100%">
         <tr>
-            <td>
-                <img style="margin-top: 50px"
-                    src="https://veryfrais.com/public/storage/restaurant/2022-09-23-632d303dc15f3.png" width="160px"
-                    height="75px" /><br>
+            <td style="width: 50%">
+                {{-- <img style="margin-top: 50px" width="160px" height="75px" /><br> --}}
             </td>
-            <td>
+            <td style="width: 50%">
                 <b>Date</b> : {{ $order->order_date }} <br>
                 <b>Facture N° : </b> {{ $order->id }} - {{ date('Y') }} <br>
             </td>
         </tr>
         <tr>
-            <td>
-                <p>Veryfrais </p> <br>
-                <p>ANGLE BD ABDELMOUMEN
-                    & RUE SOUMAYA RES
-                    SHEHRAZADE 3 ETG 4 N20
-                    20100, Casablanca</p> <br>
-                <b>Telephone : </b> 0600000000 <br>
-                <b>email : </b> <br>
+            <td style="width: 50%">
+                <p>{{ $order->Company->company_name }} </p> <br>
+                <p>{{ $order->Company->company_adresse }} </p> <br>
+                <b>Telephone : </b> {{ $order->Company->company_phone }} <br>
+                <b>email : </b> {{ $order->Company->company_email }} <br>
             </td>
-            <td>
+            <td style="width: 50%">
                 <b>Commande N° : </b> {{ $order->id }} - {{ date('Y') }} <br>
                 <b>Date</b> : {{ $order->order_date }} <br>
                 <b>Fournisseur : </b> null <br>

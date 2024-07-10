@@ -156,7 +156,7 @@ const title = "orders";
             <template #actions="{ item }">
                 <a :href="route('admin.pdf.facture' , item)" target="_blank"
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><i
-                        class="fa-solid fa-file-pdf"></i></a>
+                        class="fa-solid fa-file-pdf"></i>pdf</a>
             </template>
         </Table>
     </AdminLayout>
