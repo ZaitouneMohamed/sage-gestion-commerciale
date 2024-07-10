@@ -34,23 +34,17 @@ class Company extends Model
         'printer_id',
     ];
 
-    protected $casts = [
-        'show_email' => 'boolean',
-        'show_address' => 'boolean',
-        'show_order_tax' => 'boolean',
-        'show_discount' => 'boolean',
-        'show_shipping' => 'boolean',
-        'backup_status' => 'boolean',
+    protected $appends = [
+        'company_logo',
     ];
+    public function Image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 
-    protected $attributes = [
-        'default_language' => 'en',
-        'show_email' => true,
-        'show_address' => true,
-        'show_order_tax' => true,
-        'show_discount' => true,
-        'show_shipping' => true,
-        'backup_status' => false,
-        'receipt_printer_type' => 'browser',
-    ];
+    public function getCompanyLogoAttribute()
+    {
+        return $this->Image ? asset("images/Company/" . $this->Image->url) : 'aaaa';
+    }
+
 }

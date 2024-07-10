@@ -2,7 +2,6 @@
 
     <Head title="Create Order" />
     <AdminLayout title="create New Order">
-        {{ form }}
         <section class="bg-white dark:bg-gray-900">
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Create Order</h2>
             <form action="#">
