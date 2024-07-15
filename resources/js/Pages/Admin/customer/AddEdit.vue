@@ -64,9 +64,9 @@ function submitForm() {
         router.put('customer/' + props.data.id, form, {
             preserveState: false,
             onSuccess: () => {
-                preserveState: false
                 ClearForm();
             },
+            preserveState: (page) => Object.keys(page.props.errors).length > 0,
             onError: (errors) => {
                 form.errors = errors
             }

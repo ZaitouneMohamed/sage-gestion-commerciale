@@ -122,7 +122,7 @@ const CreateProduct = () => {
             </div>
         </div>
         <Table :items="data" :title="title" :route="'product'" :columns="columns" :showactions="true"
-            :colNames="colNames" @data="handleSuppData">
+            :colNames="colNames" @data="handleSuppData" :showTrFromView="true">
             <template #actions="{ item }">
                 <button :id="'dropdownButton' + item.id" :data-dropdown-toggle="'dropdownMenu' + item.id
                     "

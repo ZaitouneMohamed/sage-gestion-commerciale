@@ -48,21 +48,21 @@ function submitForm() {
         router.post('supplier', form, {
             onSuccess: () => {
                 ClearForm();
-                preserveState: false
             },
             onError: (errors) => {
                 form.errors = errors
-            }
+            },
+            preserveState: (page) => Object.keys(page.props.errors).length > 0
         })
     } else {
         router.put('supplier/' + props.data.id, form, {
             onSuccess: () => {
                 ClearForm();
-                preserveState: false
             },
             onError: (errors) => {
                 form.errors = errors
-            }
+            },
+            preserveState: (page) => Object.keys(page.props.errors).length > 0
         })
     }
 }

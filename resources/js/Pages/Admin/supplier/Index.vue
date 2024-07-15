@@ -2,6 +2,7 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Table from "@/Components/Table.vue";
 import { Head } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 import AddEdit from "./AddEdit.vue";
 import DefaultModal from "@/Components/Modal.vue";
 import { ref } from "vue";
@@ -41,6 +42,15 @@ let type = ref("");
 const handleSuppData = (data) => {
     type.value = "update";
     selectedData.value = data;
+};
+
+const deleteRecord = (id) => {
+    if (confirm("Are you sure you want to delete this record?")) {
+        const fullLink = "supplier/" + id;
+        router.delete(fullLink, {
+            preserveState: false,
+        });
+    }
 };
 
 const CreateSupplier = () => {
@@ -170,7 +180,7 @@ const CreateSupplier = () => {
         </div>
         <!-- <CrudLayout></CrudLayout> -->
         <Table :items="data" :title="title" :route="'supplier'" :columns="columns" :showactions="true"
-            :colNames="colNames">
+            :colNames="colNames" :showTrFromView="true">
             <template #actions="{ item }">
                 <button :id="'dropdownButton' + item.id" :data-dropdown-toggle="'dropdownMenu' + item.id
                     "

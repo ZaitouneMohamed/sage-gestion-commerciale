@@ -29,8 +29,8 @@ function submitForm() {
         router.post('categorie', form, {
             onSuccess: () => {
                 form.category_name = ""
-                preserveState: (page) => Object.keys(page.props.errors).length > 0
             },
+            preserveState: (page) => Object.keys(page.props.errors).length > 0,
             onError: (errors) => {
                 form.errors = errors
             }
@@ -39,8 +39,8 @@ function submitForm() {
         router.put('categorie/' + props.data.id, form, {
             onSuccess: () => {
                 form.category_name = ""
-                preserveState: (page) => Object.keys(page.props.errors).length > 0
             },
+            preserveState: (page) => Object.keys(page.props.errors).length > 0,
             onError: (errors) => {
                 form.errors = errors
             }
