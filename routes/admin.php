@@ -40,7 +40,7 @@ Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->gro
     // settings
     Route::controller(SettingsController::class)->name('setting.')->group(function () {
         Route::get('setting', 'index')->name('index');
-        // Route::post('settings-edit', 'update')->name('update');
+        Route::post('settings-edit/{setting}', 'UpdateSettings')->name('UpdateSettings');
     });
 
     Route::controller(PdfController::class)->name('pdf.')->group(function () {

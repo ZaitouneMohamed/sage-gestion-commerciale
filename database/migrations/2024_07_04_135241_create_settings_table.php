@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('show_order_tax')->default(1);
             $table->boolean('show_discount')->default(1);
             $table->boolean('show_shipping')->default(1);
-            $table->boolean('show_ice')->default(1);;
+            $table->boolean('show_ice')->default(1);
             $table->timestamps();
         });
     }
