@@ -101,25 +101,26 @@ onMounted(() => {
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email :</label>
                                 <input type="email" v-model="form.company_email" id="last-name"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Company Email" >
+                                    placeholder="Company Email">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="country"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone :</label>
                                 <input type="text" v-model="form.company_phone" id="country"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Company phone" >
+                                    placeholder="Company phone">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="country"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tax :</label>
                                 <input type="text" v-model="form.company_tax" id="country"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Company tax" >
+                                    placeholder="Company tax">
                             </div>
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="country"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse :</label>
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse
+                                    :</label>
                                 <input type="text" name="country" id="country" v-model="form.company_adresse"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Company adresse">
@@ -131,11 +132,13 @@ onMounted(() => {
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Company ICE">
                             </div>
-                            <div class="col-span-6 sm:col-full">
-                                <button
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                    type="submit">Save all</button>
-                            </div>
+                        </div>
+                        <br><br>
+
+                        <div class="col-span-6 sm:col-full">
+                            <button
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                type="submit">Save all</button>
                         </div>
                     </form>
                 </div>
