@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "flowbite": "^2.3.0",
-        "flowbite-vue": "^0.1.4"
+        "flowbite-vue": "^0.1.4",
+        "vue-sweetalert2": "^5.0.11"
     }
 }

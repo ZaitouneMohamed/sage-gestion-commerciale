@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-
-Route::middleware('rol')
+Route::middleware(["auth" , "role:super-admin"])->prefix('super-admin')->name('super-admin.')->group(function(){
+    Route::get('/' , function(){
+        return Inertia::render('super-admin/index');
+    });
+});
 
 
