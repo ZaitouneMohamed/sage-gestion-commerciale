@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\CategorieController;
 use App\Http\Controllers\Dashboard\CompanyController;
 use App\Http\Controllers\Dashboard\CustomarController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\MouvementController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PdfController;
+use App\Http\Controllers\Dashboard\PricingController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SupplierController;
@@ -26,6 +28,12 @@ Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->gro
     Route::resource('product', ProductController::class);
     Route::resource('mouvement', MouvementController::class);
 
+    // pricing routes
+    Route::controller(PricingController::class)->group(function () {
+        Route::get('/plans',  'index')->name('plans.list');
+        Route::get('/create-subscription/{plan}', 'checkout')->name('checkout');
+        // Route::post('/create-subscription',  'createSubscription')->name('subscription.create');
+    });
     // Order Routes
     Route::controller(OrderController::class)->name('order.')->group(function () {
         Route::get('orders-list', 'OrdersList')->name('list');

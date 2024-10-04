@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
+
 </script>
 
 <template>
@@ -676,16 +677,16 @@ import { Link } from "@inertiajs/vue3";
                     >
                         <li>
                             <a
-                                href="#"
+                                :href="route('profile.edit')"
                                 class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                                 >My profile</a
                             >
                         </li>
                         <li>
-                            <a
+                            <Link
                                 href="#"
                                 class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-                                >Account settings</a
+                                >Account settings</Link
                             >
                         </li>
                     </ul>

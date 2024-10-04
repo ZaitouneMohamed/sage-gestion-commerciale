@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients');
-            $table->dateTime('order_date');
-            $table->integer('order_status')->default(1);
+            $table->string('name');
+            $table->string('gateway_id')->unique();
+            $table->string('product_id')->unique();
+            $table->integer('amount');
+            $table->enum('interval', ['month', 'year','lifetime']);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('plans');
     }
 };
