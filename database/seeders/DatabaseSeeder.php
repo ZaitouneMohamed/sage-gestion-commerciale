@@ -11,8 +11,8 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
     public function run(): void
-    {
-        $this->call(PlanSeeder::class);
+    { 
+        //$this->call(PlanSeeder::class);
         $this->call(CompanieSeeder::class);
         \App\Models\User::factory(1)->create();
         // \App\Models\Categorie::factory(10)->create();

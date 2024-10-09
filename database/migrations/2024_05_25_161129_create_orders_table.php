@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('clients');
+            $table->foreignId('customer_id')->constrained('customers');
             $table->dateTime('order_date');
             $table->integer('order_status')->default(1);
             $table->timestamps();

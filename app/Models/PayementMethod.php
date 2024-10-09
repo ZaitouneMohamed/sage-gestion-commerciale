@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Plan extends Model
+class PayementMethod extends Model
 {
     use HasFactory;
 
-    protected $table = 'plans';
+    protected $fillable = ['user_id', 'gateway', 'payment_method_id', 'is_default'];
 
-    protected $fillable = ['name', 'slug', 'price', 'currency', 'interval', 'trial_days', 'description'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function subscriptions()
     {

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     protected $tables = [
         'users',
-        'clients',
+        'customers',
         'categories',
         'suppliers',
         'products',

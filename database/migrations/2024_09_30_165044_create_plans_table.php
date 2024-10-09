@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('gateway_id')->unique();
-            $table->string('product_id')->unique();
-            $table->integer('amount');
-            $table->enum('interval', ['month', 'year','lifetime']);
+            $table->string('slug')->unique();
+            $table->decimal('price', 8, 2);
+            $table->string('currency')->default('MAD');
+            $table->enum('interval', ['daily', 'weekly', 'monthly', 'yearly']);
+            $table->integer('trial_days')->default(0);
+            $table->text('description')->nullable(); 
             $table->timestamps();
         });
     }
