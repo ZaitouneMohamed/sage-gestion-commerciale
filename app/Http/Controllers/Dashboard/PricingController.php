@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
+use App\Models\Subscription;
+use App\Services\PayementService;
 use Illuminate\Http\Request;
-use Laravel\Cashier\Payment;
-use Stripe\Exception\InvalidRequestException as StripeInvalidRequestException;
-use Illuminate\Support\Arr;
-use Laravel\Cashier\Cashier;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class PricingController extends Controller
@@ -22,12 +19,43 @@ class PricingController extends Controller
 
     public function checkout(Plan $plan , Request $request)
     {
-        return $request->user()
-            ->newSubscription($plan->product_id, $plan->gateway_id)
-            ->checkout([
-                'success_url' => route('success'),
-                'cancel_url' => route('cancel'),
-            ]);
+        return Inertia::render('Admin/pricing/Checkout' , compact('plan'));
     }
+
+    public function createSubscription(Request $request, Plan $plan)
+    {
+        // Validate the incoming request if necessary
+        $request->validate([
+            'payementMode' => 'required|string',
+        ]);
+
+        // Initialize the payment service with the selected payment method
+        $paymentService = new PayementService($request->payementMode);
+
+        // Process the payment
+        $paymentResult = $paymentService->payMainFunction();
+
+        // Check if the paymentResult is a URL for PayPal
+        if (filter_var($paymentResult, FILTER_VALIDATE_URL)) {
+            return redirect()->away($paymentResult);
+        }
+
+        // Handle other payment methods and log success or failure
+        if ($paymentResult === "Stripe payment successful" || $paymentResult === "CMI payment successful") {
+            Subscription::create([
+                'user_id' => auth()->user()->id,
+                'plan_id' => $plan->id,
+                'payment_method' => $request->payementMode,
+                'status' => 'active',
+                'trial_ends_at' => now()->addDays($plan->trial_days),
+                'ends_at' => now()->addMonths(1), // Adjust based on your billing cycle
+            ]);
+
+            return redirect()->route('success.page'); // Redirect to a success page
+        }
+
+        return redirect()->route('error.page')->with('error', 'Payment failed: ' . $paymentResult);
+    }
+
 
 }

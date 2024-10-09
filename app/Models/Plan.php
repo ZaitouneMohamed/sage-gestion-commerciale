@@ -17,4 +17,10 @@ class Plan extends Model
     {
         return $this->hasMany(Subscription::class);
     }
+
+    // Override the route key name to use the slug
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

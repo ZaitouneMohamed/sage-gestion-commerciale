@@ -31,8 +31,8 @@ Route::middleware(["auth", "inertia:app"])->name("admin.")->prefix('admin')->gro
     // pricing routes
     Route::controller(PricingController::class)->group(function () {
         Route::get('/plans',  'index')->name('plans.list');
-        Route::get('/create-subscription/{plan}', 'checkout')->name('checkout');
-        // Route::post('/create-subscription',  'createSubscription')->name('subscription.create');
+        Route::get('/checkout/{plan}', 'checkout')->name('checkout');
+        Route::post('/checkout/create-subscription/{plan}',  'CreateSubscription')->name('subscription.create');
     });
     // Order Routes
     Route::controller(OrderController::class)->name('order.')->group(function () {
