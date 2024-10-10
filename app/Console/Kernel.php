@@ -15,6 +15,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
     }
 
+    protected $commands = [
+        Commands\MakeSevice::class,
+    ];
+
     /**
      * Register the commands for the application.
      */
