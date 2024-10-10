@@ -26,7 +26,7 @@ defineProps({
                     <div class="w-full px-4">
                         <div class="hero-content wow fadeInUp mx-auto max-w-[780px] text-center" data-wow-delay=".2s">
                             <h1
-                                class="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
+                                class="mb-6 text-3xl font-bold mt-12 leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]">
                                 Logiciel Gratuit de Facturation
                             </h1>
                             <!-- <p

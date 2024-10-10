@@ -49,7 +49,7 @@ import { Link } from "@inertiajs/vue3";
                 >
                     <span
                         class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white"
-                        >SageVisuals</span
+                        >ManageMyGoods</span
                     >
                 </Link>
                 <form action="#" method="GET" class="hidden md:block md:pl-2">

@@ -37,11 +37,14 @@ class PricingController extends Controller
 
         // Check if the paymentResult is a URL for PayPal
         if (filter_var($paymentResult, FILTER_VALIDATE_URL)) {
-            return redirect()->away($paymentResult);
+            return redirect()->away($paymentResult); // Redirect to PayPal checkout page
         }
+
+        dd($paymentResult);
 
         // Handle other payment methods and log success or failure
         if ($paymentResult === "Stripe payment successful" || $paymentResult === "CMI payment successful") {
+            // Create a new subscription record in the database
             Subscription::create([
                 'user_id' => auth()->user()->id,
                 'plan_id' => $plan->id,
@@ -54,8 +57,10 @@ class PricingController extends Controller
             return redirect()->route('success.page'); // Redirect to a success page
         }
 
-        return redirect()->route('error.page')->with('error', 'Payment failed: ' . $paymentResult);
+        // If the payment failed, redirect to an error page with an error message
+        dd('Payment failed: ' . $paymentResult);
     }
+
 
 
 }
