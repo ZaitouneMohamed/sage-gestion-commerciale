@@ -33,7 +33,7 @@ class PricingController extends Controller
         $paymentService = new PayementService($request->payementMode);
 
         // Process the payment
-        $paymentResult = $paymentService->payMainFunction();
+        $paymentResult = $paymentService->payMainFunction($plan);
 
         // Check if the paymentResult is a URL for PayPal
         if (filter_var($paymentResult, FILTER_VALIDATE_URL)) {

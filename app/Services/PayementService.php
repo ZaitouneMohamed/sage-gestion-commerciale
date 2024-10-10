@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Plan;
 use Illuminate\Support\Facades\Log;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -15,10 +16,10 @@ class PayementService
     }
 
 
-    public function payMainFunction()
+    public function payMainFunction(Plan $plan )
     {
         if ($this->PayementMethod == "paypal") {
-            return $this->payByPaypal();
+            return $this->payByPaypal($plan->price);
         }
         if ($this->PayementMethod == "stripe") {
             return $this->payByStripe();
@@ -29,7 +30,7 @@ class PayementService
         }
     }
 
-    public function payByPaypal()
+    public function payByPaypal($amont)
     {
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -44,7 +45,7 @@ class PayementService
                     [
                         "amount" => [
                             "currency_code" => "USD",
-                            "value" => "100.00"
+                            "value" => $amont
                         ]
                     ]
                 ]
