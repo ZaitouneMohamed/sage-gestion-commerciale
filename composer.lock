@@ -4173,6 +4173,7 @@
                 }
             ],
             "time": "2024-09-02T10:17:15+00:00"
+
         },
         {
             "name": "srmklive/paypal",
@@ -4298,6 +4299,7 @@
                 "source": "https://github.com/stripe/stripe-php/tree/v13.18.0"
             },
             "time": "2024-04-09T21:08:04+00:00"
+
         },
         {
             "name": "symfony/console",
