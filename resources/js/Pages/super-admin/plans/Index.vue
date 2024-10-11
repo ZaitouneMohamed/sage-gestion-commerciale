@@ -1,5 +1,5 @@
 <script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
+import AdminLayout from "@/Layouts/super-admin.vue";
 import Table from "@/Components/Table.vue";
 import Pagination from "@/Components/Pagination.vue";
 import { Head ,router} from "@inertiajs/vue3";
