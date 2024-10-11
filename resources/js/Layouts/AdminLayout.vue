@@ -3,7 +3,6 @@ import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import NavBar from "../Pages/Admin/Components/NavBar.vue";
 import SideBar from "../Pages/Admin/Components/SideBar.vue";
-import { Head, Link } from "@inertiajs/vue3";
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -21,7 +20,7 @@ onMounted(() => {
         <SideBar />
         <!-- SideBar End -->
         <main class="h-auto p-4 pt-20 md:ml-64">
-            <div v-if="true" class="text text-blue-500 mb-4">
+            <div v-if="$page.props.flash" class="text text-blue-500 mb-4">
                 {{ $page.props.flash.success }}
             </div>
             <slot />

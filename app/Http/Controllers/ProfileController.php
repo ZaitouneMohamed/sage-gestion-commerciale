@@ -16,12 +16,36 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): Response
+    public function edit(Request $request)
     {
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+        $user = auth()->user(); // Get the authenticated user
+        $subscription = $user->subscription('default');
+        if ($subscription) {
+            // Retrieve the subscription details
+            $nextPayment = $subscription->nextPayment(); // Fetch the next payment date
+
+            return response()->json([
+                'status' => 'success',
+                'subscription' => $subscription,
+                'next_payment' => $nextPayment ? $nextPayment->date()->toDateString() : null, // Format the date
+            ]);
+        } else {
+            dd('no');
+            # code...
+        }
+
+
+        // Assuming you have a Subscription model and relationship set up
+        $subscriptions = $user->subscriptions;
+
+
+        return response()->json([
+            'status' => 'success',
         ]);
+        //  return Inertia::render('Profile/Edit', [
+        //         'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+        //         'status' => session('status'),
+        //     ]);
     }
 
     /**

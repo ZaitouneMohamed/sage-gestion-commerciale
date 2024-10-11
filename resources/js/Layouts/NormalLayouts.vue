@@ -5,7 +5,7 @@ import { Head, Link } from "@inertiajs/vue3";
 import '../assets/css/swiper-bundle.min.css';
 import '../assets/css/animate.css';
 import '../assets/css/tailwind.css';
-// import '../assets/js/wow.min.js';
+import logo from '../assets/images/SageVisuals-transparent.png';
 import '../assets/js/swiper-bundle.min.js';
 // import '../assets/js/main.js';
 
@@ -22,7 +22,7 @@ onMounted(() => {
             <div class="relative flex items-center justify-between -mx-4">
                 <div class="max-w-full px-4 w-60">
                     <Link href="" class="block w-full py-5 navbar-logo">
-                        <!-- <img src="assets/images/logo/logo-white.svg" alt="logo" class="w-full header-logo" /> -->
+                        <img :src="logo" alt="logo" class="w-full header-logo" />
                     </Link>
                 </div>
                 <div class="flex items-center justify-between w-full px-4">
