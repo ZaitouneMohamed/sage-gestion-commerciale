@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectSuperAdminIfNotAuth
@@ -17,7 +18,7 @@ class RedirectSuperAdminIfNotAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check() || !Auth::user()->hasRole("super-admin")) {
-            dd("rje3 t9awd");
+            return redirect()->route('super-admin.login');
         }
         return $next($request);
     }

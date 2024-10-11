@@ -19,6 +19,11 @@ use Stripe\StripeClient;
 |
 */
 
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'plans' => Plan::all(),
+    ]);
+})->middleware("inertia:landingapp");
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

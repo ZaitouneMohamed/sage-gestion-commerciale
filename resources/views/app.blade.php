@@ -29,9 +29,7 @@
 
 
 
-<<<<<<< HEAD
 
-=======
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link rel="icon" href="{{ asset('images/local/SageVisuals.png') }}" type="image/icon type">
@@ -48,5 +46,4 @@
         <script src="https://js.stripe.com/v3/"></script>
 
     </body>
->>>>>>> origin/master
 </html>

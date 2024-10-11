@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Plan extends Model
 {
@@ -13,6 +14,7 @@ class Plan extends Model
 
     protected $fillable = ['name', 'slug', 'price', 'currency', 'interval', 'trial_days', 'description'];
 
+    public $timestamps = false;
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
@@ -22,5 +24,14 @@ class Plan extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($plan) {
+            // Generate the slug from the name
+            $plan->slug = Str::slug($plan->name);
+        });
     }
 }

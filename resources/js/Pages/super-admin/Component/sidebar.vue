@@ -25,7 +25,7 @@ import { Link } from "@inertiajs/vue3";
             </form>
             <ul class="space-y-2">
                 <li>
-                    <Link :href="route('admin.home')"
+                    <Link :href="route('super-admin.home')"
                         class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg aria-hidden="true"
                         class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -56,9 +56,9 @@ import { Link } from "@inertiajs/vue3";
                     </button>
                     <ul id="dropdown-orders" class="hidden py-2 space-y-2">
                         <li>
-                            <Link :href="route('admin.order.list')"
+                            <Link :href="route('super-admin.plan.index')"
                                 class="flex items-center w-full p-2 text-base font-medium text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                            Orders List</Link>
+                            PLan List</Link>
                         </li>
                     </ul>
                 </li>
