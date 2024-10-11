@@ -19,7 +19,6 @@ use Stripe\StripeClient;
 |
 */
 
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'plans' => Plan::all(),
@@ -30,9 +29,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::view('success','checkout.success')->middleware("auth")->name('success');
-Route::view('cancel','checkout.cancel')->middleware("auth")->name('cancel');
-
 Route::middleware('auth')->group(function () {
     Route::get('admin/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('admin/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -41,3 +37,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
+require __DIR__ . '/super-admin.php';
