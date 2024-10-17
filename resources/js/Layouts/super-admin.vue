@@ -3,7 +3,6 @@ import { onMounted } from "vue";
 import { initFlowbite } from "flowbite";
 import NavBar from "../Pages/super-admin/Component/NavBar.vue";
 import SideBar from "../Pages/super-admin/Component/sidebar.vue";
-import { Head, Link } from "@inertiajs/vue3";
 
 // initialize components based on data attribute selectors
 onMounted(() => {

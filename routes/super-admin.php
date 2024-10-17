@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SuperAdmin\PlanController;
+use App\Http\Controllers\SuperAdmin\SubscriptionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,7 @@ Route::middleware(["SuperAdminRedirection","role:super-admin", "inertia:app"])->
         return Inertia::render('super-admin/index');
     })->name('home');
     Route::resource("plan" , PlanController::class);
+    Route::resource("subscriotions" , SubscriptionController::class);
 
 });
 
