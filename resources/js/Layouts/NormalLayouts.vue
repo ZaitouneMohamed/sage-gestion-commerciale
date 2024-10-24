@@ -137,7 +137,7 @@ onMounted(() => {
 
     <!-- ====== Footer Section Start -->
     <footer class="wow fadeInUp relative z-10 bg-[#090E34] pt-20 lg:pt-[100px]" data-wow-delay=".15s">
-        <div class="container">
+        <!-- <div class="container">
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
                     <div class="w-full mb-10">
@@ -279,7 +279,7 @@ onMounted(() => {
                         </ul>
                     </div>
                 </div>
-                <!-- <div class="w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12">
+                <div class="w-full px-4 md:w-2/3 lg:w-6/12 xl:w-3/12">
                     <div class="w-full mb-10">
                         <h4 class="text-lg font-semibold text-white mb-9">Latest blog</h4>
                         <div class="flex flex-col gap-8">
@@ -301,9 +301,9 @@ onMounted(() => {
                             </a>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
-        </div>
+        </div>  -->
 
         <div class="mt-12 border-t border-[#8890A4] border-opacity-40 py-8 lg:mt-[60px]">
             <div class="container">
@@ -330,9 +330,9 @@ onMounted(() => {
                         <div class="flex justify-center my-1 md:justify-end">
                             <p class="text-base text-gray-7">
                                 Designed and Developed by
-                                <a href="https://tailgrids.com" rel="nofollow noopner" target="_blank"
+                                <a href="https://mohamedzaitoune.com" rel="nofollow noopner" target="_blank"
                                     class="text-gray-1 hover:underline">
-                                    TailGrids and UIdeck
+                                    Mohamed Zaitoune
                                 </a>
                             </p>
                         </div>
